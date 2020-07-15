@@ -20,7 +20,7 @@ else
     git pull && \
     git add --all && \ 
     git commit -a -m "Automatic build $timestp" && \ 
-    git push https://github.com/blairjames/nmap_docker_image || \
+    git push || \
     printf "\n\ngit push FAILED!!\n\n"
 fi
 # Push the new tag to Dockerhub.
