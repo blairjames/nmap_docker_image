@@ -4,9 +4,7 @@ timestamp() {
   date +"%Y-%m-%d_%H-%M-%S"
 }
 
-#docker build . -t blairy/nmap:$(timestamp)
-
-
+docker build . -t blairy/nmap:$(timestamp)
 
 git add Dockerfile 
 git commit -m "Automatic build $(timestamp)"
