@@ -1,6 +1,6 @@
 ## nmap_docker_image
 - Lean.
-- Compiled from latest stable source. [https://nmap.org/dist/nmap-7.80.tgz]
+- Compiled from latest stable source. https://nmap.org/dist/nmap-7.80.tgz
 - Scratch built image.
 - Single concern.
 
