@@ -4,13 +4,13 @@ from os import system
 from subprocess import run, PIPE
 from typing import List
 from sys import argv
+from random import shuffle
 
 
 def switch_list():
     switches = [
     "-Pn -sS",
     "-Pn -sT",
-    "-Pn -sU"
     ]
     return switches
 
@@ -24,14 +24,12 @@ def command_builder(switches: List, targets: List, tag: str):
         cmds = [c + " --top-ports 5" for c in cmds]
 
         # Add extra switches
-        version = [c + " --version-all" for c in cmds]
-        reason = [c + " --reason" for c in cmds]
         scripts = [c + " -sC" for c in cmds]
         vers = [c + " -sV" for c in cmds]
         scripts_version = [c + " -sV -sC" for c in cmds]
         
         # Combine lists
-        cmds = cmds + version + reason + scripts + vers + scripts_version
+        cmds = cmds + scripts + vers + scripts_version
 
         # Add target/s
         cmds = [c + " " + t for c in cmds for t in targets]
@@ -39,10 +37,7 @@ def command_builder(switches: List, targets: List, tag: str):
         # Dockerize
         cmds = ["docker run " + str(tag) + " " + c for c in cmds]
 
-        # Add cmd printer
-        cmds = ["echo \'\n\nCommand: " + c + "\n\' && " + c for c in cmds]
-
-        #[print(c) for c in cmds]
+        [print(c) for c in cmds]
         return cmds
 
     except Exception as e:
@@ -52,8 +47,12 @@ def command_builder(switches: List, targets: List, tag: str):
 
 def command_executor(cmds):
     try:
+        if not cmds:
+            print("\ncmd list is empty!\n")
         # Run test commands
-        [system(c) for c in cmds]
+        for c in cmds:
+            print("\nCommand: " + c + "\n")
+            system(c)
     except Exception as e:
         print("\n*******  ERROR! running nmap command: " + str(e))
         exit(1)
