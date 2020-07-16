@@ -40,7 +40,7 @@ RUN \
     rm -rf './nmap*.tgz' && \
     chmod 755 -R ./nmap* && \
     mv ./nmap*/ /usr/share/nmap && \
-    export PATH=$PATH:/nmap
+    export PATH=$PATH:/usr/share/nmap
 RUN \
     cd /usr/share/nmap && ./configure
 RUN \    
