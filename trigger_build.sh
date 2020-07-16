@@ -24,4 +24,6 @@ else
     printf "\n\ngit push FAILED!!\n\n"
 fi
 # Push the new tag to Dockerhub.
-#docker push blairy/nmap:$timestp || printf "\n\ndocker push FAILED!!\n\n"
+docker push blairy/nmap:$timestp || printf "\n\ndocker push FAILED!!\n\n"
+exit 0
+
