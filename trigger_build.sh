@@ -2,6 +2,7 @@
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
+ssh-add /root/.ssh/blair_at_blairjames.com >> $log
 
 # Generate timestamp
 timestamp () {
