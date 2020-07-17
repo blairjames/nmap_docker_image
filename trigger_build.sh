@@ -1,7 +1,7 @@
 #!/bin/bash
 
 timestamp() {
-  date +"%Y-%m-%d_%H-%M-%S"
+  date +"%Y%m%d_%H%M%S"
 }
 
 # Assign timestamp to ensure var is a static point in time.
