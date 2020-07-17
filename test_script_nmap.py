@@ -35,7 +35,7 @@ def command_builder(switches: List, targets: List, tag: str):
         cmds = [c + " " + t for c in cmds for t in targets]
         
         # Dockerize
-        cmds = ["docker run " + str(tag) + " " + c for c in cmds]
+        cmds = ["docker run --rm " + str(tag) + " " + c for c in cmds]
 
         [print(c) for c in cmds]
         return cmds
