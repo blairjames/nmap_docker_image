@@ -3121,3 +3121,67 @@ Successfully tagged blairy/nmap:20200717_215601
 
 
 20200717_215605 - git pull failed!
+[master b7909c7] Automatic build $timestp
+ 2 files changed, 193 insertions(+), 2 deletions(-)
+20200717_215607 - git push failed!
+20200717_215607 - All completed successfully --------------------
+
+
+20200717_215801 - Starting Build.
+
+Sending build context to Docker daemon  475.6kB
+Step 1/17 : FROM alpine:latest
+ ---> a24bb4013296
+Step 2/17 : RUN     apk update && apk upgrade
+ ---> Using cache
+ ---> 37bee122e2ee
+Step 3/17 : RUN     apk add --no-cache     pcre     lua5.3-libs     openssl-dev     openssl-d-dev     openssl     libressl-dev     libressl     libssl1.1     libssh-dev     libssh2-dev     libssh2-dbg     openssh     libssh2-static     libssh     libssh2     lua     lua-ossl     g++     flex     libpcap     bison     make     git     gcc     linux-headers     musl-dev     zlib-dev     zlib     zlib-static     autoconf
+ ---> Using cache
+ ---> 24972527acbb
+Step 4/17 : RUN     wget "https://nmap.org/dist/nmap-7.80.tgz"
+ ---> Using cache
+ ---> 0671a6314f08
+Step 5/17 : RUN     tar -zxvf ./nmap* &&     rm -rf './nmap*.tgz' &&     chmod 755 -R ./nmap* &&     mv ./nmap*/ /usr/share/nmap &&     export PATH=$PATH:/usr/share/nmap
+ ---> Using cache
+ ---> 46c6b8ee8b7b
+Step 6/17 : RUN     cd /usr/share/nmap && ./configure
+ ---> Using cache
+ ---> e2b1ba5cd0a0
+Step 7/17 : RUN     cd /usr/share/nmap && make && make install
+ ---> Using cache
+ ---> d0c9acca537a
+Step 8/17 : FROM scratch
+ ---> 
+Step 9/17 : COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
+ ---> Using cache
+ ---> ea2fba2afaca
+Step 10/17 : COPY --from=0 /etc/hosts /etc/hosts
+ ---> Using cache
+ ---> 9cee232d99fd
+Step 11/17 : COPY --from=0 /etc/passwd /etc/passwd
+ ---> Using cache
+ ---> e291bcce845c
+Step 12/17 : COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
+ ---> Using cache
+ ---> d1f8c3b06e78
+Step 13/17 : COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
+ ---> Using cache
+ ---> b1d41494077d
+Step 14/17 : COPY --from=0 /usr/share/nmap /usr/share/nmap
+ ---> Using cache
+ ---> 38de807b4720
+Step 15/17 : COPY --from=0 /usr/lib/ /usr/lib/
+ ---> Using cache
+ ---> f46e8fe32258
+Step 16/17 : COPY --from=0 /lib/ /lib/
+ ---> Using cache
+ ---> 733374d4ba48
+Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
+ ---> Using cache
+ ---> 772748eddad7
+Successfully built 772748eddad7
+Successfully tagged blairy/nmap:20200717_215801
+20200717_215802 - Build completed successfully.
+
+
+20200717_215805 - git pull failed!
