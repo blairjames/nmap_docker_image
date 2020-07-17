@@ -16,7 +16,7 @@ logger() {
 
 # Assign timestamp to ensure var is a static point in time.
 timestp=$(timestamp)
-logger "Timestamp: $timestp\n"
+logger "Timestamp: $timestp Starting Build.\n"
 
 # Build the image using timestamp as tag.
 if /usr/bin/docker build . -t docker.io/blairy/nmap:$timestp >> $log; then
@@ -53,5 +53,5 @@ else
 fi
 
 # All completed successfully
-logger "All completed successfully"
+logger "All completed successfully --------------------\n\n"
 exit 0
