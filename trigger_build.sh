@@ -2,7 +2,7 @@
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
-ssh-add /root/.ssh/blair_at_blairjames.com >> $log
+ssh-agent -s && ssh-add /root/.ssh/blair_at_blairjames.com >> $log
 
 # Generate timestamp
 timestamp () {
@@ -23,7 +23,7 @@ logger "Starting Build.\n"
 if /usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp >> $log; then
     logger "Build completed successfully.\n\n"
 else
-    logger "Build FAILED!!\n\n"
+    logger "Build FAILED!! Aborting.\n\n"
     exit 1
 fi
 
@@ -31,7 +31,7 @@ fi
 # if /home/docker/nmap/nmap_docker_image/test_script_nmap.py docker.io/blairy/nmap:$timestp >> $log; then
 #     logger "Tests completed successfully.\n\n"
 # else
-#     logger "******  WARNING!!  --  Tests FAILED!!  ******\n\n"
+#     logger "******  WARNING!!  --  Tests FAILED!!  Aborting. ******\n\n"
 #     exit 1
 # fi
 
@@ -39,7 +39,8 @@ fi
 # Push to github - Triggers builds in github and Dockerhub.
 git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
 git  -C '/home/docker/nmap/nmap_docker_image/' remote -v >> $log
-/usr/bin/git -C '/home/docker/nmap/nmap_docker_image/' pull >> $log || logger "git pull failed!"
+ssh -T git@github.com:blairjames/nmap_docker_image.git
+/usr/bin/git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
 $git add --all >> $log || logger "git add failed!"
 $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
 $git push >> $log || logger "git push failed!"
