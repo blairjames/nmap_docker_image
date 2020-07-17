@@ -12,7 +12,7 @@ echo "Timestamp: $timestp"
 docker build . -t blairy/nmap:$timestp || printf "\n\nBuild FAILED!!\n\n"
 
 # Test - If test pass, commit and push to github and Dockerhub.
-if ! ./test_script_nmap.py blairy/nmap:$timestp; then
+if ! /home/docker/nmap/nmap_docker_image/test_script_nmap.py blairy/nmap:$timestp; then
     printf "\n\n******  WARNING!!  --  Tests FAILED!!  ******\n\n"
     exit 1
 else
