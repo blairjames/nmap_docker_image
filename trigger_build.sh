@@ -39,7 +39,7 @@ fi
 # Push to github - Triggers builds in github and Dockerhub.
 git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
 git  -C '/home/docker/nmap/nmap_docker_image/' remote -v >> $log
-ssh -T git@github.com
+ssh -T git@github.com >> $log
 /usr/bin/git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
 $git add --all >> $log || logger "git add failed!"
 $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
