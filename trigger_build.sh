@@ -2,7 +2,11 @@
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
-ssh-agent -s && ssh-add /root/.ssh/blair_at_blairjames.com >> $log
+ssh-agent -s > "/root/.ssh/agent/root"
+ssh-add "/root/.ssh/blair_at_blairjames.com"
+source /root/.ssh/agent/root
+
+
 
 # Generate timestamp
 timestamp () {
@@ -44,6 +48,7 @@ ssh -T git@github.com >> $log
 $git add --all >> $log || logger "git add failed!"
 $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
 $git push >> $log || logger "git push failed!"
+pkill ssh-agent
 
 
 # # Push the new tag to Dockerhub.
