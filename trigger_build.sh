@@ -3,9 +3,8 @@
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 ssh-agent -s > "/root/.ssh/agent/root"
-ssh-add "/root/.ssh/blair_at_blairjames.com"
 source /root/.ssh/agent/root
-
+ssh-add "/root/.ssh/blair_at_blairjames.com"
 
 
 # Generate timestamp
