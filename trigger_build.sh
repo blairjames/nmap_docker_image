@@ -1,29 +1,55 @@
 #!/bin/bash
 
+# Log file
+log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
+
+# Generate timestamp
 timestamp() {
-  date +"%Y%m%d_%H%M%S"
+    date +"%Y%m%d_%H%M%S"
+}
+
+# Log and Print
+logger() {
+    printf "$1\n"
+    printf "$(timestamp) - $1\n" >> $log
 }
 
 # Assign timestamp to ensure var is a static point in time.
 timestp=$(timestamp)
-echo "Timestamp: $timestp"
+logger "Timestamp: $timestp\n"
 
 # Build the image using timestamp as tag.
-docker build . -t blairy/nmap:$timestp || printf "\n\nBuild FAILED!!\n\n"
+if /usr/bin/docker build . -t docker.io/blairy/nmap:$timestp; then
+    logger "Build completed successfully.\n\n"
+else
+    logger "Build FAILED!!\n\n"
+    exit 1
+fi
 
 # Test - If test pass, commit and push to github and Dockerhub.
-if ! /home/docker/nmap/nmap_docker_image/test_script_nmap.py blairy/nmap:$timestp; then
-    printf "\n\n******  WARNING!!  --  Tests FAILED!!  ******\n\n"
-    exit 1
+if /home/docker/nmap/nmap_docker_image/test_script_nmap.py blairy/nmap:$timestp; then
+    logger "Tests completed successfully.\n\n"
 else
-    # Push to github - Triggers builds in github and Dockerhub.
-    git pull && \
-    git add --all && \ 
-    git commit -a -m "Automatic build $timestp" && \ 
-    git push || \
-    printf "\n\ngit push FAILED!!\n\n"
+    logger "******  WARNING!!  --  Tests FAILED!!  ******\n\n"
+    exit 1
 fi
-# Push the new tag to Dockerhub.
-docker push blairy/nmap:$timestp || printf "\n\ndocker push FAILED!!\n\n"
-exit 0
 
+# Push to github - Triggers builds in github and Dockerhub.
+if git pull && git add --all && git commit -a -m 'Automatic build $timestp' && git push; then
+    logger "git push completed successfully.\n\n"
+else
+    logger "git push FAILED!!\n\n"
+    exit 1    
+fi
+
+# Push the new tag to Dockerhub.
+if docker push blairy/nmap:$timestp; then 
+    logger "Docker push completed successfully.\n\n"
+else
+    logger "Docker push FAILED!!\n\n"
+    exit 1    
+fi
+
+# All completed successfully
+logger "All completed successfully"
+exit 0
