@@ -35,7 +35,9 @@ else
 fi
 
 # Push to github - Triggers builds in github and Dockerhub.
-if git pull && git add --all && git commit -a -m 'Automatic build $timestp' && git push >> $log; then
+if git pull >> $log && git add --all >> $log && \
+    git commit -a -m 'Automatic build $timestp' >> $log && \
+    git push >> $log; then
     logger "git push completed successfully.\n\n"
 else
     logger "git push FAILED!!\n\n"
