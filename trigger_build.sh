@@ -44,7 +44,6 @@ $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit faile
 $git push >> $log || logger "git push failed!"
 
 
-
 # # Push the new tag to Dockerhub.
 # if docker push blairy/nmap:$timestp >> $log; then 
 #     logger "Docker push completed successfully.\n\n"
