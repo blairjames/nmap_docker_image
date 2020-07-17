@@ -2,10 +2,12 @@
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
-ssh-agent -s > "/root/.ssh/agent/root"
+
+# Setup SSH key management
+pkill ssh-agent
+ssh-agent -s | grep -v echo > "/root/.ssh/agent/root"
 source /root/.ssh/agent/root
 ssh-add "/root/.ssh/blair_at_blairjames.com"
-
 
 # Generate timestamp
 timestamp () {
@@ -50,14 +52,14 @@ $git push >> $log || logger "git push failed!"
 pkill ssh-agent
 
 
-# # Push the new tag to Dockerhub.
-# if docker push blairy/nmap:$timestp >> $log; then 
-#     logger "Docker push completed successfully.\n\n"
-# else
-#     logger "Docker push FAILED!!\n\n"
-#     exit 1 
-# fi
+# Push the new tag to Dockerhub.
+if docker push blairy/nmap:$timestp >> $log; then 
+    logger "Docker push completed successfully.\n\n"
+else
+    logger "Docker push FAILED!!\n\n"
+    exit 1 
+fi
 
 # All completed successfully
-#logger All completed successfully
+logger All completed successfully
 
