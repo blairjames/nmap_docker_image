@@ -1,4 +1,6 @@
 #!/bin/bash
+SSH_AUTH_SOCK=/tmp/ssh-FFZ4VBMZ4wla/agent.2651762; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=2651763; export SSH_AGENT_PID;
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
