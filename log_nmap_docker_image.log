@@ -24151,3 +24151,186 @@ Command: docker run --rm docker.io/blairy/nmap:20200721_180601 -v -Pn -sT --top-
 
 
 20200721_180719 - git pull failed!
+[master 942d8b1] Automatic build $timestp
+ 1 file changed, 270 insertions(+)
+20200721_180719 - git push failed!
+The push refers to repository [docker.io/blairy/nmap]
+20200721_180719 - Docker push FAILED!!
+
+
+20200721_200602 - Starting Build.
+
+Sending build context to Docker daemon   3.82MB
+Step 1/17 : FROM alpine:latest
+ ---> a24bb4013296
+Step 2/17 : RUN     apk update && apk upgrade
+ ---> Using cache
+ ---> 37bee122e2ee
+Step 3/17 : RUN     apk add --no-cache     pcre     lua5.3-libs     openssl-dev     openssl-d-dev     openssl     libressl-dev     libressl     libssl1.1     libssh-dev     libssh2-dev     libssh2-dbg     openssh     libssh2-static     libssh     libssh2     lua     lua-ossl     g++     flex     libpcap     bison     make     git     gcc     linux-headers     musl-dev     zlib-dev     zlib     zlib-static     autoconf
+ ---> Using cache
+ ---> 24972527acbb
+Step 4/17 : RUN     wget "https://nmap.org/dist/nmap-7.80.tgz"
+ ---> Using cache
+ ---> 0671a6314f08
+Step 5/17 : RUN     tar -zxvf ./nmap* &&     rm -rf './nmap*.tgz' &&     chmod 755 -R ./nmap* &&     mv ./nmap*/ /usr/share/nmap &&     export PATH=$PATH:/usr/share/nmap
+ ---> Using cache
+ ---> 46c6b8ee8b7b
+Step 6/17 : RUN     cd /usr/share/nmap && ./configure
+ ---> Using cache
+ ---> e2b1ba5cd0a0
+Step 7/17 : RUN     cd /usr/share/nmap && make && make install
+ ---> Using cache
+ ---> d0c9acca537a
+Step 8/17 : FROM scratch
+ ---> 
+Step 9/17 : COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
+ ---> Using cache
+ ---> ea2fba2afaca
+Step 10/17 : COPY --from=0 /etc/hosts /etc/hosts
+ ---> Using cache
+ ---> 9cee232d99fd
+Step 11/17 : COPY --from=0 /etc/passwd /etc/passwd
+ ---> Using cache
+ ---> e291bcce845c
+Step 12/17 : COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
+ ---> Using cache
+ ---> d1f8c3b06e78
+Step 13/17 : COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
+ ---> Using cache
+ ---> b1d41494077d
+Step 14/17 : COPY --from=0 /usr/share/nmap /usr/share/nmap
+ ---> Using cache
+ ---> 38de807b4720
+Step 15/17 : COPY --from=0 /usr/lib/ /usr/lib/
+ ---> Using cache
+ ---> f46e8fe32258
+Step 16/17 : COPY --from=0 /lib/ /lib/
+ ---> Using cache
+ ---> 733374d4ba48
+Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
+ ---> Using cache
+ ---> 772748eddad7
+Successfully built 772748eddad7
+Successfully tagged blairy/nmap:20200721_200602
+20200721_200602 - Build completed successfully.
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.06 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.05 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.38 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.37 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.28 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.28 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.39 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-21 10:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.39 seconds
+Docker Tag: docker.io/blairy/nmap:20200721_200602
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sV -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sV -sC scanme.nmap.org
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sC scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sC scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sV scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sV scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sS --top-ports 5 -sV -sC scanme.nmap.org
+
+
+Command: docker run --rm docker.io/blairy/nmap:20200721_200602 -v -Pn -sT --top-ports 5 -sV -sC scanme.nmap.org
+
+20200721_200652 - Tests completed successfully.
+
+
+20200721_200652 - git pull failed!
