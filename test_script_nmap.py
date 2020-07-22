@@ -37,6 +37,7 @@ def command_builder(switches: List, targets: List, tag: str):
         # Dockerize
         cmds = ["docker run --rm " + str(tag) + " " + c for c in cmds]
 
+        print("Commands to be run:")
         [print(c) for c in cmds]
         return cmds
 
@@ -50,9 +51,7 @@ def command_executor(cmds):
         if not cmds:
             print("\ncmd list is empty!\n")
         # Run test commands
-        for c in cmds:
-            print("\nCommand: " + c + "\n")
-            system(c)
+        system(c) for c in cmds
     except Exception as e:
         print("\n*******  ERROR! running nmap command: " + str(e))
         exit(1)
