@@ -44,7 +44,7 @@ RUN \
 RUN \
     cd /usr/share/nmap && ./configure
 RUN \    
-    cd /usr/share/nmap && make && make install
+    cd /usr/share/nmap && make && make install && make check
 FROM scratch
 COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
 COPY --from=0 /etc/hosts /etc/hosts
