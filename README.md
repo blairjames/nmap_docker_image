@@ -1,8 +1,10 @@
 ## nmap_docker_image
-- Lean.
+- Lean and up-to-date.
 - Compiled from latest stable source: https://nmap.org/dist/nmap-7.80.tgz
-- Scratch built image.
-- Single concern.
+- Clean, scratch-built image.
+- Single concern container.
+
+##### Please send any questions, queries or concerns to: `nmapdocker@blairjames.com`
 
 #### Run as you would native nmap, just add the `docker run` prefix.
 ``` 
