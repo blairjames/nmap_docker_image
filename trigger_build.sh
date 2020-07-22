@@ -5,6 +5,7 @@ log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 
 # Setup SSH key management
 pkill ssh-agent
+sleep 1
 ssh-agent -s | grep -v echo > "/root/.ssh/agent/root"
 source /root/.ssh/agent/root
 ssh-add "/root/.ssh/blair_at_blairjames.com"

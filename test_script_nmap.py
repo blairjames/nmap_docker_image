@@ -51,7 +51,7 @@ def command_executor(cmds):
         if not cmds:
             print("\ncmd list is empty!\n")
         # Run test commands
-        system(c) for c in cmds
+        [system(c) for c in cmds]
     except Exception as e:
         print("\n*******  ERROR! running nmap command: " + str(e))
         exit(1)
