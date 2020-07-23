@@ -4,6 +4,11 @@
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 
 # Setup SSH key management
+# TODO: Add test for existing ssh-agent - nb. The file with the env vars 
+# needs to be current with the running pid. So at some point we need 
+# to run and capture the ssh-agent cmd and add the pvt key. 
+# need to test if ssh-agent runs at start up etc 
+# make this a function!
 pkill ssh-agent
 sleep 1
 ssh-agent -s | grep -v echo > "/root/.ssh/agent/root"
@@ -42,6 +47,8 @@ else
 fi
 
 # Push to github - Triggers builds in github and Dockerhub.
+# TODO: Make this a function and add better exception management.. 
+# only run this if the SSH function is successful.
 git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
 $git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
 $git add --all >> $log || logger "git add failed!"
