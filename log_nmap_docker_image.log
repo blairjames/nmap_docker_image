@@ -35030,3 +35030,183 @@ docker run --rm docker.io/blairy/nmap:20200723_180601 -v -Pn -sT --top-ports 5 -
 
 
 20200723_180730 - git pull failed!
+[master 67f40e9] Automatic build $timestp
+ 2 files changed, 424 insertions(+), 5 deletions(-)
+20200723_180732 - git push failed!
+The push refers to repository [docker.io/blairy/nmap]
+cb893243f0a9: Preparing
+e56b2235a1dd: Preparing
+a923d2df4fb2: Preparing
+a4290aca94b8: Preparing
+e1cd6cd232ea: Preparing
+110e0d433a6d: Preparing
+7ec06f8f985e: Preparing
+7ddaf3abcca5: Preparing
+110e0d433a6d: Waiting
+7ddaf3abcca5: Waiting
+a923d2df4fb2: Layer already exists
+e56b2235a1dd: Layer already exists
+cb893243f0a9: Layer already exists
+a4290aca94b8: Layer already exists
+e1cd6cd232ea: Layer already exists
+7ddaf3abcca5: Layer already exists
+7ec06f8f985e: Layer already exists
+110e0d433a6d: Layer already exists
+20200723_180601: digest: sha256:fa087c9e1fe6946dd9747a230cf3d5d956f3c020a96d8bb32971db9725796ada size: 1996
+20200723_180743 - Docker push completed successfully.
+
+
+20200723_180743 - All completed successfully
+20200723_200601 - Starting Build.
+
+Sending build context to Docker daemon  6.609MB
+Step 1/17 : FROM alpine:latest
+ ---> a24bb4013296
+Step 2/17 : RUN     apk update && apk upgrade
+ ---> Using cache
+ ---> 37bee122e2ee
+Step 3/17 : RUN     apk add --no-cache     pcre     lua5.3-libs     openssl-dev     openssl-d-dev     openssl     libressl-dev     libressl     libssl1.1     libssh-dev     libssh2-dev     libssh2-dbg     openssh     libssh2-static     libssh     libssh2     lua     lua-ossl     g++     flex     libpcap     bison     make     git     gcc     linux-headers     musl-dev     zlib-dev     zlib     zlib-static     autoconf
+ ---> Using cache
+ ---> 24972527acbb
+Step 4/17 : RUN     wget "https://nmap.org/dist/nmap-7.80.tgz"
+ ---> Using cache
+ ---> 0671a6314f08
+Step 5/17 : RUN     tar -zxvf ./nmap* &&     rm -rf './nmap*.tgz' &&     chmod 755 -R ./nmap* &&     mv ./nmap*/ /usr/share/nmap &&     export PATH=$PATH:/usr/share/nmap
+ ---> Using cache
+ ---> 46c6b8ee8b7b
+Step 6/17 : RUN     cd /usr/share/nmap && ./configure
+ ---> Using cache
+ ---> e2b1ba5cd0a0
+Step 7/17 : RUN     cd /usr/share/nmap && make && make install && make check
+ ---> Using cache
+ ---> 9bf6d4f9e394
+Step 8/17 : FROM scratch
+ ---> 
+Step 9/17 : COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
+ ---> Using cache
+ ---> ea2fba2afaca
+Step 10/17 : COPY --from=0 /etc/hosts /etc/hosts
+ ---> Using cache
+ ---> 9cee232d99fd
+Step 11/17 : COPY --from=0 /etc/passwd /etc/passwd
+ ---> Using cache
+ ---> e291bcce845c
+Step 12/17 : COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
+ ---> Using cache
+ ---> d1f8c3b06e78
+Step 13/17 : COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
+ ---> Using cache
+ ---> b1d41494077d
+Step 14/17 : COPY --from=0 /usr/share/nmap /usr/share/nmap
+ ---> Using cache
+ ---> 0707599e74cf
+Step 15/17 : COPY --from=0 /usr/lib/ /usr/lib/
+ ---> Using cache
+ ---> 5277898d2951
+Step 16/17 : COPY --from=0 /lib/ /lib/
+ ---> Using cache
+ ---> 3f9d79888e6f
+Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
+ ---> Using cache
+ ---> c3b337603e62
+Successfully built c3b337603e62
+Successfully tagged blairy/nmap:20200723_200601
+20200723_200605 - Build completed successfully.
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.05 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.04 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.36 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.28 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.22 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.22 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.30 seconds
+           Raw packets sent: 0 (0B) | Rcvd: 0 (0B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-07-23 10:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+NSE: Script Post-scanning.
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Initiating NSE at 10:06
+Completed NSE at 10:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 0 IP addresses (0 hosts up) scanned in 5.34 seconds
+Docker Tag: docker.io/blairy/nmap:20200723_200601
+Commands to be run:
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sS --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sT --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sS --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sT --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sS --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sT --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sS --top-ports 5 -sV -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200723_200601 -v -Pn -sT --top-ports 5 -sV -sC scanme.nmap.org
+20200723_200654 - Tests completed successfully.
+
+
+20200723_200654 - git pull failed!
