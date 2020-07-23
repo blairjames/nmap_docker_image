@@ -9,11 +9,19 @@ log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 # to run and capture the ssh-agent cmd and add the pvt key. 
 # need to test if ssh-agent runs at start up etc 
 # make this a function!
-pkill ssh-agent
-sleep 1
-ssh-agent -s | grep -v echo > "/root/.ssh/agent/root"
-source /root/.ssh/agent/root
-ssh-add "/root/.ssh/blair_at_blairjames.com"
+
+is_ssh_agent_running () {
+    pid = "ps aux | grep -i ssh-agent | grep -iv defunct | grep -iv grep | cut -c 11-16" 
+    pid_env = "cat /root/.ssh/agent/root | tail -n 1 | cut -c 15-20"
+}
+
+start_ssh_agent () {
+    pkill ssh-agent
+    sleep 2
+    ssh-agent -s | grep -v echo > "/root/.ssh/agent/root"
+    source /root/.ssh/agent/root
+    ssh-add "/root/.ssh/blair_at_blairjames.com"
+}
 
 # Generate timestamp
 timestamp () {
