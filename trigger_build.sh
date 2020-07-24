@@ -55,11 +55,12 @@ fi
 # only run this if the SSH function is successful.
 git () {
     git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
-    $git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
-    $git add --all >> $log || logger "git add failed!"
-    $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
-    $git push >> $log || logger "git push failed!"
+    $git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || except "git pull failed!"
+    $git add --all >> $log || except "git add failed!"
+    $git commit -a -m 'Automatic build $timestp' >> $log || except "git commit failed!"
+    $git push >> $log || except "git push failed!"
 }
+
 
 # Run the git transactions
 if git; then
@@ -68,6 +69,7 @@ else
     logger "git failed!!" 
 fi
 
+
 # Push the new tag to Dockerhub.
 if docker push blairy/nmap:$timestp >> $log; then 
     logger "Docker push completed successfully.\n\n"
@@ -75,7 +77,6 @@ else
     logger "Docker push FAILED!!\n\n"
     exit 1 
 fi
-
 
 
 # All completed successfully
