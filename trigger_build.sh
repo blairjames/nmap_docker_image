@@ -20,6 +20,13 @@ logger () {
 }
 
 
+# Exception Catcher
+except () {
+    logger $1
+    return 1
+}
+
+
 # Assign timestamp to ensure var is a static point in time.
 timestp=$(timestamp)
 logger "Starting Build.\n"
@@ -46,12 +53,20 @@ fi
 # Push to github - Triggers builds in github and Dockerhub.
 # TODO: Make this a function and add better exception management.. 
 # only run this if the SSH function is successful.
-git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
-$git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
-$git add --all >> $log || logger "git add failed!"
-$git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
-$git push >> $log || logger "git push failed!"
+git () {
+    git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
+    $git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || logger "git pull failed!"
+    $git add --all >> $log || logger "git add failed!"
+    $git commit -a -m 'Automatic build $timestp' >> $log || logger "git commit failed!"
+    $git push >> $log || logger "git push failed!"
+}
 
+# Run the git transactions
+if git; then
+    logger "git completed successfully." 
+else
+    logger "git failed!!" 
+fi
 
 # Push the new tag to Dockerhub.
 if docker push blairy/nmap:$timestp >> $log; then 
@@ -60,6 +75,7 @@ else
     logger "Docker push FAILED!!\n\n"
     exit 1 
 fi
+
 
 
 # All completed successfully
