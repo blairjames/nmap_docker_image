@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Env Vars for SSH.
-source /root/.ssh/agent/root
+source /root/.ssh/agent/root || . /root/.ssh/agent/root
 
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
