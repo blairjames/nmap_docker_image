@@ -1,11 +1,12 @@
 ## nmap_docker_image
 ###### Please send any questions, queries or concerns to: `nmapdocker@blairjames.com`
 
+- Full featured NMAP implementation. 
 - Lean and up-to-date.
-- Compiled from latest stable source: https://nmap.org/dist/nmap-7.80.tgz
+- CI/CD built, monitored and maintained.
+- Compiled fresh from latest stable source: https://nmap.org/dist/nmap-7.80.tgz
 - Clean, scratch-built image.
 - Single concern container.
-
 
 
 #### Run as you would native nmap, just add the `docker run` prefix.
