@@ -91911,3 +91911,420 @@ docker run --rm docker.io/blairy/nmap:20200802_220601 -v -Pn -sT --top-ports 5 -
 
 
 Already up to date.
+[master f339960] Automatic build $timestp
+ 1 file changed, 417 insertions(+)
+20200802_220723 - git completed successfully.
+The push refers to repository [docker.io/blairy/nmap]
+cb893243f0a9: Preparing
+e56b2235a1dd: Preparing
+a923d2df4fb2: Preparing
+a4290aca94b8: Preparing
+e1cd6cd232ea: Preparing
+110e0d433a6d: Preparing
+7ec06f8f985e: Preparing
+7ddaf3abcca5: Preparing
+7ec06f8f985e: Waiting
+110e0d433a6d: Waiting
+7ddaf3abcca5: Waiting
+e1cd6cd232ea: Layer already exists
+a4290aca94b8: Layer already exists
+e56b2235a1dd: Layer already exists
+a923d2df4fb2: Layer already exists
+110e0d433a6d: Layer already exists
+7ddaf3abcca5: Layer already exists
+cb893243f0a9: Layer already exists
+7ec06f8f985e: Layer already exists
+20200802_220601: digest: sha256:fa087c9e1fe6946dd9747a230cf3d5d956f3c020a96d8bb32971db9725796ada size: 1996
+20200802_220733 - Docker push completed successfully.
+
+
+20200802_220733 - All completed successfully
+20200803_000601 - Starting Build.
+
+Sending build context to Docker daemon  37.21MB
+Step 1/17 : FROM alpine:latest
+ ---> a24bb4013296
+Step 2/17 : RUN     apk update && apk upgrade
+ ---> Using cache
+ ---> 37bee122e2ee
+Step 3/17 : RUN     apk add --no-cache     pcre     lua5.3-libs     openssl-dev     openssl-d-dev     openssl     libressl-dev     libressl     libssl1.1     libssh-dev     libssh2-dev     libssh2-dbg     openssh     libssh2-static     libssh     libssh2     lua     lua-ossl     g++     flex     libpcap     bison     make     git     gcc     linux-headers     musl-dev     zlib-dev     zlib     zlib-static     autoconf
+ ---> Using cache
+ ---> 24972527acbb
+Step 4/17 : RUN     wget "https://nmap.org/dist/nmap-7.80.tgz"
+ ---> Using cache
+ ---> 0671a6314f08
+Step 5/17 : RUN     tar -zxvf ./nmap* &&     rm -rf './nmap*.tgz' &&     chmod 755 -R ./nmap* &&     mv ./nmap*/ /usr/share/nmap &&     export PATH=$PATH:/usr/share/nmap
+ ---> Using cache
+ ---> 46c6b8ee8b7b
+Step 6/17 : RUN     cd /usr/share/nmap && ./configure
+ ---> Using cache
+ ---> e2b1ba5cd0a0
+Step 7/17 : RUN     cd /usr/share/nmap && make && make install && make check
+ ---> Using cache
+ ---> 9bf6d4f9e394
+Step 8/17 : FROM scratch
+ ---> 
+Step 9/17 : COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
+ ---> Using cache
+ ---> ea2fba2afaca
+Step 10/17 : COPY --from=0 /etc/hosts /etc/hosts
+ ---> Using cache
+ ---> 9cee232d99fd
+Step 11/17 : COPY --from=0 /etc/passwd /etc/passwd
+ ---> Using cache
+ ---> e291bcce845c
+Step 12/17 : COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
+ ---> Using cache
+ ---> d1f8c3b06e78
+Step 13/17 : COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
+ ---> Using cache
+ ---> b1d41494077d
+Step 14/17 : COPY --from=0 /usr/share/nmap /usr/share/nmap
+ ---> Using cache
+ ---> 0707599e74cf
+Step 15/17 : COPY --from=0 /usr/lib/ /usr/lib/
+ ---> Using cache
+ ---> 5277898d2951
+Step 16/17 : COPY --from=0 /lib/ /lib/
+ ---> Using cache
+ ---> 3f9d79888e6f
+Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
+ ---> Using cache
+ ---> c3b337603e62
+Successfully built c3b337603e62
+Successfully tagged blairy/nmap:20200803_000601
+20200803_000602 - Build completed successfully.
+
+
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.24s elapsed
+Initiating SYN Stealth Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 14:06, 0.36s elapsed (5 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.27s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE
+21/tcp  closed ftp
+22/tcp  open   ssh
+23/tcp  closed telnet
+80/tcp  open   http
+443/tcp closed https
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 1.07 seconds
+           Raw packets sent: 5 (220B) | Rcvd: 5 (208B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.20s elapsed
+Initiating Connect Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed Connect Scan at 14:06, 0.20s elapsed (5 total ports)
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.20s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE
+21/tcp  closed ftp
+22/tcp  open   ssh
+23/tcp  closed telnet
+80/tcp  open   http
+443/tcp closed https
+
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 0.45 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.02s elapsed
+Initiating SYN Stealth Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 14:06, 0.26s elapsed (5 total ports)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 6.30s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.18s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE
+21/tcp  closed ftp
+22/tcp  open   ssh
+| ssh-hostkey: 
+|   1024 ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 (DSA)
+|   2048 20:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 (RSA)
+|   256 96:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 (ECDSA)
+|_  256 33:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 (ED25519)
+23/tcp  closed telnet
+80/tcp  open   http
+|_http-favicon: Unknown favicon MD5: 156515DA3C0F7DC6B2493BD5CE43F795
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Go ahead and ScanMe!
+443/tcp closed https
+
+NSE: Script Post-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 7.01 seconds
+           Raw packets sent: 5 (220B) | Rcvd: 5 (208B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 121 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.02s elapsed
+Initiating Connect Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed Connect Scan at 14:06, 0.24s elapsed (5 total ports)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 7.17s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.24s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE
+21/tcp  closed ftp
+22/tcp  open   ssh
+| ssh-hostkey: 
+|   1024 ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 (DSA)
+|   2048 20:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 (RSA)
+|   256 96:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 (ECDSA)
+|_  256 33:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 (ED25519)
+23/tcp  closed telnet
+80/tcp  open   http
+|_http-favicon: Unknown favicon MD5: 156515DA3C0F7DC6B2493BD5CE43F795
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Go ahead and ScanMe!
+443/tcp closed https
+
+NSE: Script Post-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 7.73 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.33s elapsed
+Initiating SYN Stealth Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 14:06, 0.31s elapsed (5 total ports)
+Initiating Service scan at 14:06
+Scanning 2 services on scanme.nmap.org (45.33.32.156)
+Completed Service scan at 14:06, 6.52s elapsed (2 services on 1 host)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.91s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.82s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.28s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE VERSION
+21/tcp  closed ftp
+22/tcp  open   ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+23/tcp  closed telnet
+80/tcp  open   http    Apache httpd 2.4.7 ((Ubuntu))
+443/tcp closed https
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 9.30 seconds
+           Raw packets sent: 5 (220B) | Rcvd: 5 (208B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 45 scripts for scanning.
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.28s elapsed
+Initiating Connect Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed Connect Scan at 14:06, 0.18s elapsed (5 total ports)
+Initiating Service scan at 14:06
+Scanning 2 services on scanme.nmap.org (45.33.32.156)
+Completed Service scan at 14:06, 6.43s elapsed (2 services on 1 host)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.98s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.82s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.18s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE VERSION
+21/tcp  closed ftp
+22/tcp  open   ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+23/tcp  closed telnet
+80/tcp  open   http    Apache httpd 2.4.7 ((Ubuntu))
+443/tcp closed https
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 9.03 seconds
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.02s elapsed
+Initiating SYN Stealth Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 22/tcp on 45.33.32.156
+Discovered open port 80/tcp on 45.33.32.156
+Completed SYN Stealth Scan at 14:06, 0.26s elapsed (5 total ports)
+Initiating Service scan at 14:06
+Scanning 2 services on scanme.nmap.org (45.33.32.156)
+Completed Service scan at 14:06, 6.44s elapsed (2 services on 1 host)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 6.04s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.92s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.21s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE VERSION
+21/tcp  closed ftp
+22/tcp  open   ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   1024 ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 (DSA)
+|   2048 20:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 (RSA)
+|   256 96:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 (ECDSA)
+|_  256 33:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 (ED25519)
+23/tcp  closed telnet
+80/tcp  open   http    Apache httpd 2.4.7 ((Ubuntu))
+|_http-favicon: Unknown favicon MD5: 156515DA3C0F7DC6B2493BD5CE43F795
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: Go ahead and ScanMe!
+443/tcp closed https
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+NSE: Script Post-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 14.11 seconds
+           Raw packets sent: 5 (220B) | Rcvd: 5 (208B)
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-08-02 14:06 UTC
+NSE: Loaded 151 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating NSE at 14:06
+Completed NSE at 14:06, 0.00s elapsed
+Initiating Parallel DNS resolution of 1 host. at 14:06
+Completed Parallel DNS resolution of 1 host. at 14:06, 0.02s elapsed
+Initiating Connect Scan at 14:06
+Scanning scanme.nmap.org (45.33.32.156) [5 ports]
+Discovered open port 80/tcp on 45.33.32.156
+Discovered open port 22/tcp on 45.33.32.156
+Completed Connect Scan at 14:06, 0.18s elapsed (5 total ports)
+Initiating Service scan at 14:06
+Scanning 2 services on scanme.nmap.org (45.33.32.156)
+Completed Service scan at 14:07, 6.47s elapsed (2 services on 1 host)
+NSE: Script scanning 45.33.32.156.
+Initiating NSE at 14:07
+Completed NSE at 14:07, 6.13s elapsed
+Initiating NSE at 14:07
+Completed NSE at 14:07, 0.82s elapsed
+Initiating NSE at 14:07
+Completed NSE at 14:07, 0.00s elapsed
+Nmap scan report for scanme.nmap.org (45.33.32.156)
+Host is up (0.18s latency).
+Other addresses for scanme.nmap.org (not scanned): 2600:3c01::f03c:91ff:fe18:bb2f
+
+PORT    STATE  SERVICE VERSION
+21/tcp  closed ftp
+22/tcp  open   ssh     OpenSSH 6.6.1p1 Ubuntu 2ubuntu2.13 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   1024 ac:00:a0:1a:82:ff:cc:55:99:dc:67:2b:34:97:6b:75 (DSA)
+|   2048 20:3d:2d:44:62:2a:b0:5a:9d:b5:b3:05:14:c2:a6:b2 (RSA)
+|   256 96:02:bb:5e:57:54:1c:4e:45:2f:56:4c:4a:24:b2:57 (ECDSA)
+|_  256 33:fa:91:0f:e0:e1:7b:1f:6d:05:a2:b0:f1:54:41:56 (ED25519)
+23/tcp  closed telnet
+80/tcp  open   http    Apache httpd 2.4.7 ((Ubuntu))
+|_http-favicon: Unknown favicon MD5: 156515DA3C0F7DC6B2493BD5CE43F795
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: Apache/2.4.7 (Ubuntu)
+|_http-title: Go ahead and ScanMe!
+443/tcp closed https
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+NSE: Script Post-scanning.
+Initiating NSE at 14:07
+Completed NSE at 14:07, 0.00s elapsed
+Initiating NSE at 14:07
+Completed NSE at 14:07, 0.00s elapsed
+Initiating NSE at 14:07
+Completed NSE at 14:07, 0.00s elapsed
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 14.02 seconds
+Docker Tag: docker.io/blairy/nmap:20200803_000601
+Commands to be run:
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sS --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sT --top-ports 5 scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sS --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sT --top-ports 5 -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sS --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sT --top-ports 5 -sV scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sS --top-ports 5 -sV -sC scanme.nmap.org
+docker run --rm docker.io/blairy/nmap:20200803_000601 -v -Pn -sT --top-ports 5 -sV -sC scanme.nmap.org
+20200803_000712 - Tests completed successfully.
+
+
+Already up to date.
