@@ -1,6 +1,4 @@
 ## nmap_docker_image
-###### Please send any questions, queries or concerns to: `nmapdocker@blairjames.com`
-
 - Full featured NMAP implementation. 
 - Lean and up-to-date.
 - CI/CD built, monitored and maintained.
