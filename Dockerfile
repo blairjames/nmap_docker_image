@@ -3,7 +3,6 @@ RUN \
     apk update && apk upgrade
 RUN \
     apk add --no-cache \
-    sudo \
     pcre \
     lua5.3-libs \
     openssl-dev \
@@ -46,19 +45,14 @@ RUN tar -zxvf ./nmap* && \
 RUN cd /usr/share/nmap && ./configure
 RUN cd /usr/share/nmap && make && make install && make check
 
-RUN adduser -u 1000 -S nonpriv -G wheel -h /dev/null -s /sbin/nologin -D 
-RUN echo '%wheel ALL=(ALL) ALL' > /etc/sudoers.d/wheel
-
 FROM scratch
 COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
 COPY --from=0 /etc/hosts /etc/hosts
 COPY --from=0 /etc/passwd /etc/passwd
-COPY --from=0 /etc/sudoers.d/ /etc/sudoers.d/
 COPY --from=0 /etc/group /etc/group
 COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
 COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
 COPY --from=0 /usr/share/nmap /usr/share/nmap 
 COPY --from=0 /usr/lib/ /usr/lib/
 COPY --from=0 /lib/ /lib/
-USER nonpriv
 ENTRYPOINT ["/usr/bin/nmap"]
