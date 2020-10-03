@@ -1,7 +1,5 @@
 FROM alpine:latest
-RUN \
-    apk update && apk upgrade
-RUN \
+RUN apk update && apk upgrade && \
     apk add --no-cache \
     pcre \
     lua5.3-libs \
