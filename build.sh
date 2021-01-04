@@ -73,5 +73,8 @@ else
     exit 1 
 fi
 
+# Prune
+/usr/bin/git gc --prune || echo "Error!! - git gc failed!"
+
 # All completed successfully
 logger "All completed successfully"
