@@ -6,12 +6,10 @@ source /root/.ssh/agent/root || . /root/.ssh/agent/root
 # Log file
 log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 
-
 # Generate timestamp
 timestamp () {
     date +"%Y%m%d_%H%M%S"
 }
-
 
 # Log and Print
 logger () {
@@ -74,7 +72,7 @@ else
 fi
 
 # Prune
-/usr/bin/git gc --prune || echo "Error!! - git gc failed!"
+/usr/bin/git gc --prune || logger "Error!! - git gc failed!"
 
 # All completed successfully
 logger "All completed successfully"

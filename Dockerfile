@@ -32,7 +32,9 @@ RUN apk update && apk upgrade && \
     zlib-static \
     autoconf
 
-RUN wget "https://nmap.org/dist/nmap-7.80.tgz"
+# Changed from nmap-7.8 to nmap-7.91 - 20200115-0924 @blair 
+# RUN wget "https://nmap.org/dist/nmap-7.80.tgz"
+RUN wget "https://nmap.org/dist/nmap-7.91.tgz"
 
 RUN tar -zxvf ./nmap* && \
     rm -rf './nmap*.tgz' && \
@@ -40,8 +42,8 @@ RUN tar -zxvf ./nmap* && \
     mv ./nmap*/ /usr/share/nmap && \
     export PATH=$PATH:/usr/share/nmap
 
-RUN cd /usr/share/nmap && ./configure
-RUN cd /usr/share/nmap && make && make install && make check
+# Changed from two RUN statements to one to avoid edge case build cache issues. 20200115-0928 @blair    
+RUN cd /usr/share/nmap && ./configure && make && make install && make check
 
 FROM scratch
 COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
