@@ -4,7 +4,6 @@ RUN apk update && apk upgrade && \
     pcre \
     lua5.3-libs \
     openssl-dev \
-    openssl-d-dev \
     openssl \
     libressl-dev \
     libressl \
@@ -30,7 +29,11 @@ RUN apk update && apk upgrade && \
     zlib-dev \
     zlib \
     zlib-static \
-    autoconf
+    autoconf 
+
+# apk package "openssl-d-dev" was not located by alpine during github's build process. @blair 20200116-0634 
+RUN apk search openssl && apk add openssl-d-dev || echo "Could not add openssl-d-dev attempting to continue despite this."
+
 
 # Changed from nmap-7.8 to nmap-7.91 - 20200115-0924 @blair 
 # RUN wget "https://nmap.org/dist/nmap-7.80.tgz"
