@@ -8,9 +8,7 @@ declare -r log="/home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
 
 # Generate timestamp
 timestamp () {
-  local ts
-  ts=date +"%Y%m%d_%H%M%S"
-  return $ts
+  date +"%Y%m%d_%H%M%S"
 }
 
 # Log and Print
