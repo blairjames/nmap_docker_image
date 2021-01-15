@@ -2,7 +2,7 @@
 - Full featured NMAP implementation. 
 - Lean and up-to-date.
 - CI/CD built, monitored and maintained.
-- Compiled fresh from latest stable source: https://nmap.org/dist/nmap-7.80.tgz
+- Compiled fresh from latest stable source: ~https://nmap.org/dist/nmap-7.80.tgz~ https://nmap.org/dist/nmap-7.91.tgz~
 - Clean, scratch-built image.
 - Single concern container.
 
