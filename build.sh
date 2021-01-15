@@ -36,12 +36,12 @@ else
 fi
 
 # Test - If test pass, commit and push to github and Dockerhub.
-if /home/docker/nmap/nmap_docker_image/test_script_nmap.py docker.io/blairy/nmap:$timestp >> $log; then
-    logger "Tests completed successfully.\n\n"
-else
-    logger "******  WARNING!!  --  Tests FAILED!!  Aborting. ******\n\n"
-    exit 1
-fi
+# if /home/docker/nmap/nmap_docker_image/test_script_nmap.py docker.io/blairy/nmap:$timestp >> $log; then
+#    logger "Tests completed successfully.\n\n"
+# else
+#    logger "******  WARNING!!  --  Tests FAILED!!  Aborting. ******\n\n"
+#    exit 1
+# fi
 
 
 # Push to github - Triggers builds in github and Dockerhub.
@@ -54,7 +54,6 @@ git () {
     $git commit -a -m 'Automatic build '$timestp >> $log || except "git commit failed!"
     $git push >> $log || except "git push failed!"
 }
-
 
 # Run the git transactions
 if git; then
