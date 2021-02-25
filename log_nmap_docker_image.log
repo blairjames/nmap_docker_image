@@ -54727,3 +54727,89 @@ Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
 Successfully built fbfefcc849fb
 Successfully tagged blairy/nmap:20210226_060301
 Already up to date.
+[master 8662f77] Automatic build 20210226_060301
+ 1 file changed, 86 insertions(+)
+The push refers to repository [docker.io/blairy/nmap]
+3ea525cbb268: Preparing
+e428d6d5b02c: Preparing
+278fa0cb85da: Preparing
+cb72887120e3: Preparing
+dd960a3ffb05: Preparing
+91f73e3589d1: Preparing
+090857d52737: Preparing
+01a3d18886c2: Preparing
+2ce944e9555e: Preparing
+91f73e3589d1: Waiting
+2ce944e9555e: Waiting
+01a3d18886c2: Waiting
+dd960a3ffb05: Layer already exists
+278fa0cb85da: Layer already exists
+cb72887120e3: Layer already exists
+3ea525cbb268: Layer already exists
+e428d6d5b02c: Layer already exists
+2ce944e9555e: Layer already exists
+91f73e3589d1: Layer already exists
+01a3d18886c2: Layer already exists
+090857d52737: Layer already exists
+20210226_060301: digest: sha256:c141e4021301193beeb522f52b90b4c5e9bbf62f167f1f82263eedc9a0006141 size: 2203
+20210226_060319 - Docker push completed successfully.
+
+
+20210226_060319 - Running git gc --prune
+20210226_060319 - All complete.
+20210226_070301 - Starting Build. Timestamp: 20210226_070301
+
+20210226_070301 - Running Docker Build Command: "/usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:20210226_070301 >> /home/docker/nmap/nmap_docker_image/log_nmap_docker_image.log"
+Sending build context to Docker daemon  41.93MB
+Step 1/17 : FROM alpine:latest
+ ---> a24bb4013296
+Step 2/17 : RUN apk update && apk upgrade &&     apk add --no-cache     pcre     lua5.3-libs     openssl-dev     openssl     libressl-dev     libressl     libssl1.1     libssh-dev     libssh2-dev     libssh2-dbg     openssh     libssh2-static     libssh     libssh2     lua     lua-ossl     g++     flex     libpcap     bison     make     git     gcc     linux-headers     musl-dev     zlib-dev     zlib     zlib-static     autoconf
+ ---> Using cache
+ ---> a1590e95c3a5
+Step 3/17 : RUN apk search openssl && apk add openssl-d-dev || echo "Could not add openssl-d-dev attempting to continue despite this."
+ ---> Using cache
+ ---> 74c0dbd82afb
+Step 4/17 : RUN wget "https://nmap.org/dist/nmap-7.91.tgz"
+ ---> Using cache
+ ---> 15380b8d8ecd
+Step 5/17 : RUN tar -zxvf ./nmap* &&     rm -rf './nmap*.tgz' &&     chmod 755 -R ./nmap* &&     mv ./nmap*/ /usr/share/nmap &&     export PATH=$PATH:/usr/share/nmap
+ ---> Using cache
+ ---> 78d44aba8650
+Step 6/17 : RUN cd /usr/share/nmap && ./configure && make && make install && make check
+ ---> Using cache
+ ---> c7a4a45bddaf
+Step 7/17 : FROM scratch
+ ---> 
+Step 8/17 : COPY --from=0 /usr/share/nmap/nmap /usr/bin/nmap
+ ---> Using cache
+ ---> 65681262d3b5
+Step 9/17 : COPY --from=0 /etc/hosts /etc/hosts
+ ---> Using cache
+ ---> 412610168a53
+Step 10/17 : COPY --from=0 /etc/passwd /etc/passwd
+ ---> Using cache
+ ---> 4348c93e00fd
+Step 11/17 : COPY --from=0 /etc/group /etc/group
+ ---> Using cache
+ ---> 88775ed4fc6c
+Step 12/17 : COPY --from=0 /etc/ssl/openssl.cnf /etc/ssl/openssl.cnf
+ ---> Using cache
+ ---> 0e20b4e42875
+Step 13/17 : COPY --from=0 /usr/local/share/nmap/ /usr/local/share/nmap/
+ ---> Using cache
+ ---> e6f1a7afb227
+Step 14/17 : COPY --from=0 /usr/share/nmap /usr/share/nmap
+ ---> Using cache
+ ---> f58c8d8532d3
+Step 15/17 : COPY --from=0 /usr/lib/ /usr/lib/
+ ---> Using cache
+ ---> b429de34204d
+Step 16/17 : COPY --from=0 /lib/ /lib/
+ ---> Using cache
+ ---> 7940f78931a4
+Step 17/17 : ENTRYPOINT ["/usr/bin/nmap"]
+ ---> Using cache
+ ---> fbfefcc849fb
+Successfully built fbfefcc849fb
+Successfully tagged blairy/nmap:20210226_070301
+Already up to date.
