@@ -42,7 +42,8 @@ function git() {
 # Push the new tag to Dockerhub.
 function docker_push() {
   if docker push blairy/nmap:$timestp >> $log; then 
-    logger "Docker push completed successfully.\n\n"
+    logger "Docker push completed successfully.\n"
+    exit 0
   else
     logger "Docker push FAILED!!\n\n"
     exit 1 
@@ -53,7 +54,6 @@ function main() {
 build
 git
 docker_push
-prune
 logger "All complete."
 }
 
