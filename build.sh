@@ -23,11 +23,9 @@ logger "Starting Build. Timestamp: $timestp\n"
 
 # Build the image using timestamp as tag.
 function build() {
-  local cmd
-  cmd="/usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp --no-cache --rm --pull >> $log"
-  logger "Running Docker Build Command: \"$cmd\""
-  /usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp >> $log || logger "Error! docker build failed"
-}
+  logger "Running Docker Build"
+  /usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp --no-cache --rm --pull >> $log
+  }
 
 # Push to github - Triggers builds in github and Dockerhub.
 function git() {
