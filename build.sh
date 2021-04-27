@@ -24,7 +24,7 @@ logger "Starting Build. Timestamp: $timestp\n"
 # Build the image using timestamp as tag.
 function build() {
   local cmd
-  cmd="/usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp >> $log"
+  cmd="/usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp --no-cache --rm --pull >> $log"
   logger "Running Docker Build Command: \"$cmd\""
   /usr/bin/docker build /home/docker/nmap/nmap_docker_image -t docker.io/blairy/nmap:$timestp >> $log || logger "Error! docker build failed"
 }
@@ -32,7 +32,8 @@ function build() {
 # Push to github - Triggers builds in github and Dockerhub.
 function git() {
   git="/usr/bin/git -C /home/docker/nmap/nmap_docker_image/"
-  $git -C '/home/docker/nmap/nmap_docker_image/' pull git@github.com:blairjames/nmap_docker_image.git >> $log || except "git pull failed!"
+  $git gc --prune
+  $git pull git@github.com:blairjames/nmap_docker_image.git >> $log || except "git pull failed!"
   $git add --all >> $log || except "git add failed!"
   $git commit -a -m 'Automatic build '$timestp >> $log || except "git commit failed!"
   $git push >> $log || except "git push failed!"
@@ -47,13 +48,6 @@ function docker_push() {
     exit 1 
   fi
 }
-
-# Prune the git tree in the local dir
-function prune() {
-  logger "Running git gc --prune"
-  /usr/bin/git gc --prune 
-}
-
 
 function main() {
 build
